@@ -1,0 +1,71 @@
+<UserControl x:Class="Biblioteca.WPF.Vistas.UcLibros"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Loaded="Uc_Loaded">
+    <Grid Margin="8">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Label Content="Mantenimiento de libros" FontSize="16" FontWeight="Bold"/>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,4,0,8">
+            <Label Content="Buscar:" VerticalAlignment="Center"/>
+            <TextBox x:Name="txtBuscar" Width="280" Height="24" VerticalAlignment="Center" KeyDown="TxtBuscar_KeyDown"/>
+            <Button Content="Buscar" Width="80" Margin="8,0,0,0" Click="BtnBuscar_Click"/>
+            <Button Content="Ver todos" Width="90" Margin="8,0,0,0" Click="BtnTodos_Click"/>
+        </StackPanel>
+
+        <DataGrid x:Name="dgLibros" Grid.Row="2"
+                  AutoGenerateColumns="False" IsReadOnly="True"
+                  SelectionMode="Single" CanUserAddRows="False"
+                  SelectionChanged="DgLibros_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Título" Binding="{Binding Titulo}" Width="*"/>
+                <DataGridTextColumn Header="ISBN" Binding="{Binding ISBN}" Width="150"/>
+                <DataGridTextColumn Header="Autor" Binding="{Binding AutorNombre}" Width="200"/>
+                <DataGridTextColumn Header="Ejemplares" Binding="{Binding Ejemplares}" Width="100"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <GroupBox Grid.Row="3" Header="Datos del libro" Margin="0,8,0,0">
+            <Grid Margin="6">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Label Content="Título:"/>
+                <TextBox x:Name="txtTitulo" Grid.Column="1" Height="24" Margin="0,4" VerticalAlignment="Center" MaxLength="200"/>
+                <Label Grid.Column="2" Content="ISBN:"/>
+                <TextBox x:Name="txtIsbn" Grid.Column="3" Height="24" Margin="0,4" VerticalAlignment="Center" MaxLength="20"/>
+
+                <Label Grid.Row="1" Content="Autor:"/>
+                <ComboBox x:Name="cboAutor" Grid.Row="1" Grid.Column="1" Height="24" Margin="0,4"
+                          VerticalAlignment="Center" DisplayMemberPath="Nombre" SelectedValuePath="AutorId"/>
+                <Label Grid.Row="1" Grid.Column="2" Content="Ejemplares:"/>
+                <TextBox x:Name="txtEjemplares" Grid.Row="1" Grid.Column="3" Height="24" Width="80"
+                         HorizontalAlignment="Left" Margin="0,4" VerticalAlignment="Center" MaxLength="5"/>
+
+                <StackPanel Grid.Row="2" Grid.ColumnSpan="4" Orientation="Horizontal" Margin="0,6,0,0">
+                    <Button x:Name="btnNuevo" Content="Nuevo" Width="90" Margin="0,0,8,0" Click="BtnNuevo_Click"/>
+                    <Button x:Name="btnGuardar" Content="Guardar" Width="90" Margin="0,0,8,0" Click="BtnGuardar_Click"/>
+                    <Button x:Name="btnEliminar" Content="Dar de baja" Width="100" Click="BtnEliminar_Click"/>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+
+        <TextBlock x:Name="txtEstado" Grid.Row="4" Margin="4,6,0,0"/>
+    </Grid>
+</UserControl>

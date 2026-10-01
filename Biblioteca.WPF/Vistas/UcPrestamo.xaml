@@ -1,0 +1,61 @@
+<UserControl x:Class="Biblioteca.WPF.Vistas.UcPrestamo"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Loaded="Uc_Loaded">
+    <Grid Margin="8">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Label Content="Registrar préstamo" FontSize="16" FontWeight="Bold"/>
+        <TextBlock x:Name="txtAyuda" Grid.Row="1" Margin="6,0,0,8" TextWrapping="Wrap"/>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <Label Content="Socio:" VerticalAlignment="Center"/>
+            <ComboBox x:Name="cboSocio" Width="280" Height="24" VerticalAlignment="Center"
+                      SelectionChanged="CboSocio_SelectionChanged">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            <Run Text="{Binding Nombre}"/>
+                            <Run Text=" - "/>
+                            <Run Text="{Binding DNI}"/>
+                        </TextBlock>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <TextBlock x:Name="txtCupo" Margin="12,0,0,0" VerticalAlignment="Center"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" Margin="0,8,0,0">
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Libro:" VerticalAlignment="Center"/>
+                <ComboBox x:Name="cboLibro" Width="360" Height="24" VerticalAlignment="Center">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock>
+                                <Run Text="{Binding Titulo}"/>
+                                <Run Text=" ("/>
+                                <Run Text="{Binding Ejemplares}"/>
+                                <Run Text=" ej.)"/>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <Button Content="Agregar" Width="80" Margin="8,0,0,0" Click="BtnAgregar_Click"/>
+                <Button x:Name="btnQuitar" Content="Quitar" Width="80" Margin="8,0,0,0" Click="BtnQuitar_Click"/>
+            </StackPanel>
+            <Label Content="Libros del préstamo:"/>
+            <ListBox x:Name="lstLibros" Height="180" DisplayMemberPath="Titulo"/>
+        </StackPanel>
+
+        <Button x:Name="btnRegistrar" Grid.Row="4" Content="Registrar préstamo" Width="150"
+                HorizontalAlignment="Left" Margin="0,10,0,0" Click="BtnRegistrar_Click"/>
+        <TextBlock x:Name="txtEstado" Grid.Row="5" Margin="4,6,0,0"/>
+    </Grid>
+</UserControl>

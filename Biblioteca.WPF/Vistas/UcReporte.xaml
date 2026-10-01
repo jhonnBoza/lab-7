@@ -1,0 +1,39 @@
+<UserControl x:Class="Biblioteca.WPF.Vistas.UcReporte"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Loaded="Uc_Loaded">
+    <Grid Margin="8">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Label Content="Reporte de préstamos" FontSize="16" FontWeight="Bold"/>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,4,0,8">
+            <Label Content="Desde:" VerticalAlignment="Center"/>
+            <DatePicker x:Name="dpDesde" Width="140" VerticalAlignment="Center"/>
+            <Label Content="Hasta:" Margin="12,0,0,0" VerticalAlignment="Center"/>
+            <DatePicker x:Name="dpHasta" Width="140" VerticalAlignment="Center"/>
+            <Button Content="Consultar" Width="90" Margin="12,0,0,0" Click="BtnConsultar_Click"/>
+        </StackPanel>
+
+        <DataGrid x:Name="dgReporte" Grid.Row="2"
+                  AutoGenerateColumns="False" IsReadOnly="True"
+                  SelectionMode="Single" CanUserAddRows="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Préstamo" Binding="{Binding PrestamoId}" Width="80"/>
+                <DataGridTextColumn Header="Socio" Binding="{Binding Socio}" Width="*"/>
+                <DataGridTextColumn Header="Libro" Binding="{Binding Libro}" Width="2*"/>
+                <DataGridTextColumn Header="Fecha préstamo" Binding="{Binding FechaPrestamo, StringFormat=dd/MM/yyyy}" Width="120"/>
+                <DataGridTextColumn Header="Fecha límite" Binding="{Binding FechaLimite, StringFormat=dd/MM/yyyy}" Width="110"/>
+                <DataGridTextColumn Header="Estado" Binding="{Binding Estado}" Width="100"/>
+                <DataGridTextColumn Header="Devolución" Binding="{Binding FechaDevolucion, StringFormat=dd/MM/yyyy}" Width="110"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <TextBlock x:Name="txtEstado" Grid.Row="3" Margin="4,6,0,0"/>
+    </Grid>
+</UserControl>
